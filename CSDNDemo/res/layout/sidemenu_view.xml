@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_black"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <ImageView
+            android:id="@+id/sidemenu_view_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/default_avatar" />
+
+        <TextView
+            android:id="@+id/sidemenu_view_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sidemenu_view_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Lmiss"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <View
+            style="@style/grayHDcutoff1dp"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/sidemenu_view_read"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/read"
+                android:id="@+id/sidemenu_view_read_icon"
+                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="阅读"
+                android:textColor="@color/gray_text_color"
+                android:id="@+id/sidemenu_view_read_tv"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            style="@style/grayHDcutoff1dp"
+            android:layout_alignParentBottom="true" />
+
+        <LinearLayout
+            android:id="@+id/sidemenu_view_ask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sidemenu_view_ask_icon"
+                android:background="@drawable/ask" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="问答"
+                android:textColor="@color/gray_text_color"
+                android:id="@+id/sidemenu_view_ask_tv"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            style="@style/grayHDcutoff1dp"
+            android:layout_alignParentBottom="true" />
+
+        <LinearLayout
+            android:id="@+id/sidemenu_view_bbs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sidemenu_view_bbs_icon"
+                android:background="@drawable/bbs" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="论坛"
+                android:textColor="@color/gray_text_color"
+                android:id="@+id/sidemenu_view_bbs_tv"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            style="@style/grayHDcutoff1dp"
+            android:layout_alignParentBottom="true" />
+
+        <LinearLayout
+            android:id="@+id/sidemenu_view_my"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sidemenu_view_my_icon"
+                android:background="@drawable/my" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="我的"
+                android:textColor="@color/gray_text_color"
+                android:id="@+id/sidemenu_view_my_tv"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <View
+            style="@style/grayHDcutoff1dp"
+            android:layout_alignParentBottom="true" />
+
+        <LinearLayout
+            android:id="@+id/sidemenu_view_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sidemenu_view_set_icon"
+                android:background="@drawable/set" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="设置"
+                android:textColor="@color/gray_text_color"
+                android:id="@+id/sidemenu_view_set_tv"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="By Savion"
+        android:textColor="@color/gray_text_color"
+        android:textSize="14sp" />
+
+</LinearLayout>
