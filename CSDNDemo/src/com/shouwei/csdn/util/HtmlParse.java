@@ -12,6 +12,7 @@ import net.tsz.afinal.http.AjaxCallBack;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
 import android.util.Log;
@@ -28,32 +29,30 @@ import com.shouwei.csdn.entity.NewsTable;
 public class HtmlParse {
 
 	/**
-	 * 获取网络数据
+	 * 获取网络html数据
 	 * 
 	 * @param type
 	 * @param page
 	 * @return
 	 * @auth shouwei
 	 */
-	public static List<NewsTable> getData(int type, int page) {
+	public static String getData(int type, int page) {
 		String url = MyConstants.getURL(type, page);
 		String htmlStr = HttpUtils.doGet(url);
-		
-		MyConstants.myLog("html ====== "+url + " ==" +htmlStr);
-
-		return parseNewsHtml(htmlStr);
+		return htmlStr;
 	}
-
-	static AjaxCallBack<String> callback = new AjaxCallBack<String>() {
-		public void onSuccess(String t) {
-			super.onSuccess(t);
-			MyConstants.myLog("t == >" + t);
-		};
-
-		public void onFailure(Throwable t, int errorNo, String strMsg) {
-			super.onFailure(t, errorNo, strMsg);
-		};
-	};
+	
+	
+//	static AjaxCallBack<String> callback = new AjaxCallBack<String>() {
+//		public void onSuccess(String t) {
+//			super.onSuccess(t);
+//			MyConstants.myLog("t == >" + t);
+//		};
+//
+//		public void onFailure(Throwable t, int errorNo, String strMsg) {
+//			super.onFailure(t, errorNo, strMsg);
+//		};
+//	};
 
 	/**
 	 * 解析新闻html
@@ -113,9 +112,6 @@ public class HtmlParse {
 			newsTable.setTags(tagList);
 			newsTableList.add(newsTable);
 		}
-		for (int i = 0; i < newsTableList.size(); i++) {
-			MyConstants.myLog(i + ":" + newsTableList.get(i).getImg_url());
-		}
 		return newsTableList;
 	}
 
@@ -125,28 +121,32 @@ public class HtmlParse {
 	 * @param str
 	 * @auth shouwei
 	 */
-	public static void parseBBSHTML(String str) {
+	public static List<BBSTable> parseBBSHTML(String str) {
 		BBSTable bbs;
 		List<BBSTable> bbslist = new ArrayList<BBSTable>();
 		Document document = Jsoup.parse(str);
 		Elements elements = document.getElementsByClass("list_1");
-		for (int i = 0; i < elements.size(); i++) {
+		Elements lis = elements.get(0).getElementsByTag("ul").get(0).getElementsByTag("li");
+		MyConstants.myLog("lis size = "+lis.size());
+		for (int i = 0; i < lis.size(); i++) {
 			bbs = new BBSTable();
-			String time = elements.get(i).getElementsByTag("span").get(0)
+			String time = lis.get(i).getElementsByTag("span").get(0)
 					.text();
-			String pop = elements.get(i).text();
-			String content = elements.get(i).getElementsByTag("a").text();
-			String target_url = elements.get(i).getElementsByTag("a")
+			String pop = lis.get(i).ownText();
+			String content = lis.get(i).getElementsByTag("a").text();
+			String target_url = lis.get(i).getElementsByTag("a")
 					.attr("herf");
-			bbs.setContent(content);
+			bbs.setTitle(content);
 			bbs.setPopularity(pop);
 			bbs.setTarget_url(target_url);
 			bbs.setTime(time);
 			bbslist.add(bbs);
+			
 		}
+		return bbslist;
 	}
 
 	public static void parseASKHTML() {
-
+		
 	}
 }

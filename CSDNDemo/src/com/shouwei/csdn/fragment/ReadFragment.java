@@ -2,6 +2,7 @@ package com.shouwei.csdn.fragment;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +30,9 @@ import com.shouwei.csdn.entity.NewsTable;
 import com.shouwei.csdn.util.HtmlParse;
 import com.shouwei.csdn.util.MyConstants;
 
-public class ReadFragment extends Fragment implements OnClickListener, OnItemClickListener {
+@SuppressLint("ValidFragment")
+public class ReadFragment extends Fragment implements OnClickListener,
+		OnItemClickListener {
 	Activity mActivity;
 	View view, footview;
 	ImageView open_sidemenu, refresh;
@@ -47,7 +50,7 @@ public class ReadFragment extends Fragment implements OnClickListener, OnItemCli
 		public void handleMessage(android.os.Message msg) {
 			if (msg.what == SUCCEED) {
 				FragmentReadItemAdapter adapter = new FragmentReadItemAdapter(
-						(List<NewsTable>) msg.obj, mActivity);
+						mActivity, (List<NewsTable>) msg.obj);
 				lv.setAdapter(adapter);
 			} else if (msg.what == FALIED) {
 				MyConstants.showToast(mActivity, "无数据");
@@ -105,8 +108,8 @@ public class ReadFragment extends Fragment implements OnClickListener, OnItemCli
 			@Override
 			public void run() {
 				super.run();
-				datalist = HtmlParse.getData(
-						MyConstants.NEWS_TYPE_NEWS, mPage);
+				datalist = HtmlParse.parseNewsHtml(HtmlParse.getData(
+						MyConstants.NEWS_TYPE_NEWS, mPage));
 				Message msg = new Message();
 				if (datalist != null && datalist.size() > 0) {
 					msg.what = SUCCEED;
@@ -133,7 +136,7 @@ public class ReadFragment extends Fragment implements OnClickListener, OnItemCli
 			anim = (RotateAnimation) AnimationUtils.loadAnimation(mActivity,
 					R.anim.rotate_anim);
 			refresh.startAnimation(anim);
-			getInfo(currentPage=1);
+			getInfo(currentPage = 1);
 			break;
 		case R.id.foot_view_more:
 			MyConstants.showToast(mActivity, "下一页");

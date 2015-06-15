@@ -1,11 +1,24 @@
 package com.shouwei.csdn.entity;
 
+import java.util.List;
+
+import org.jsoup.nodes.TextNode;
+
 public class BBSTable {
 
 	String time;
 	String target_url;
-	String content;
+	String title;
 	String popularity;
+	List<TextNode> nodes;
+
+	public List<TextNode> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<TextNode> nodes) {
+		this.nodes = nodes;
+	}
 
 	public String getTime() {
 		return time;
@@ -23,12 +36,12 @@ public class BBSTable {
 		this.target_url = target_url;
 	}
 
-	public String getContent() {
-		return content;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getPopularity() {
@@ -42,6 +55,15 @@ public class BBSTable {
 	@Override
 	public String toString() {
 		return "BBSTable [time=" + time + ", target_url=" + target_url
-				+ ", content=" + content + ", popularity=" + popularity + "]";
+				+ ", title=" + title + ", popularity=" + popularity
+				+ ", nodes=" + nodes.size() + "]";
 	}
+	public String toNodesString(){
+		String s = "";
+		for (int i = 0; i < nodes.size(); i++) {
+			s += nodes.get(i).toString();
+		}
+		return s;
+	}
+
 }

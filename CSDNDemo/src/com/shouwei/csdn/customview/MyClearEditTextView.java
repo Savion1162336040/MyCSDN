@@ -1,5 +1,4 @@
 package com.shouwei.csdn.customview;
-
 import com.shouwei.csdn.R;
 
 import android.annotation.SuppressLint;
