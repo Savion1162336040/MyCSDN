@@ -1,12 +1,19 @@
 package com.shouwei.csdn.fragment;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.admin.DeviceAdminReceiver;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,6 +34,7 @@ import com.shouwei.csdn.R;
 import com.shouwei.csdn.activity.NewsDetailActivity;
 import com.shouwei.csdn.adapter.FragmentReadItemAdapter;
 import com.shouwei.csdn.entity.NewsTable;
+import com.shouwei.csdn.service.LockService;
 import com.shouwei.csdn.util.HtmlParse;
 import com.shouwei.csdn.util.MyConstants;
 
@@ -36,7 +44,7 @@ public class ReadFragment extends Fragment implements OnClickListener,
 	Activity mActivity;
 	View view, footview;
 	ImageView open_sidemenu, refresh;
-	Button loadmore;
+	Button loadmore, lock;
 	SlidingMenu mSlidingmenu;
 	TextView center;
 	List<NewsTable> datalist;
@@ -93,6 +101,8 @@ public class ReadFragment extends Fragment implements OnClickListener,
 		footview = LayoutInflater.from(mActivity).inflate(
 				R.layout.foot_view_more, null);
 		loadmore = (Button) footview.findViewById(R.id.foot_view_more);
+		lock = (Button) view.findViewById(R.id.content_title_bar_view_lock);
+		lock.setOnClickListener(this);
 		open_sidemenu.setOnClickListener(this);
 		refresh.setOnClickListener(this);
 		center.setText("阅读");
@@ -142,6 +152,15 @@ public class ReadFragment extends Fragment implements OnClickListener,
 			MyConstants.showToast(mActivity, "下一页");
 			getInfo(++currentPage);
 			break;
+		case R.id.content_title_bar_view_lock:
+			DevicePolicyManager policy = (DevicePolicyManager) mActivity
+					.getSystemService(Context.DEVICE_POLICY_SERVICE);
+			ComponentName componentName = new ComponentName(mActivity,
+					MyAdmin.class);
+			if (policy.isAdminActive(componentName)) {
+				policy.lockNow();
+			}
+			break;
 		default:
 			break;
 		}
@@ -156,4 +175,72 @@ public class ReadFragment extends Fragment implements OnClickListener,
 		startActivity(t);
 	}
 
+//	public void lock(View view){
+//	　　　　　　//通过反射获取到sdk隐藏的服务 　
+//	　　　　　　Method method = Class.forName("android.os.ServiceManager")　
+//	　　　　　　　　　　.getMethod("getService", String.class);　
+//	　　　　　　IBinder binder = (IBinder) method.invoke(null,//激活服务　
+//	　　　　　　　　　　new Object[] { Context.DEVICE_POLICY_SERVICE });　
+//	　　　　　　 mService = IDevicePolicyManager.Stub.asInterface(binder);　
+//	　　　　　　 //定义组件的名字 　
+//	　　　　　　 ComponentName mAdminName = new ComponentName(this, MyAdmin.class);　
+//	　　　　　　 //注册权限　
+//	　　　　　　 if (mService != null) {　
+//	　　　　　　　　　　//判断自定义的广播接受者 是不是被注册成 deviceadmin的权限 　
+//	　　　　　　　　　　if (!mService.isAdminActive(mAdminName)) {　
+//	　　　　　　　　　　　　　　　　Intent intent = new Intent(　
+//	　　　　　　　　　　　　　　　　DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);　
+//	　　　　　　　　　　　　　　　　intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN,　
+//	　　　　　　　　　　　　　　　　　　　　mAdminName);　
+//	　　　　　　　　　　　　　　　　startActivity(intent);　
+//	　　　　　　　　　　　　　　}　
+//	　　　　　　　　　　//调用服务实现锁屏 　
+//	　　　　　　　　　　mService.lockNow();　
+//	　　　　　　　　　　//设置解锁密码　
+//	　　　　　　　　　　mService.resetPassword("123", 0);　
+//	　　　　　　 }　
+//	}
+	public void lock(){
+		try {
+			Method method = Class.forName("android.os.ServiceManager").getMethod("getService",String.class);
+			IBinder binder = (IBinder) method.invoke(null, new Object[]{Context.DEVICE_POLICY_SERVICE});
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	class MyAdmin extends DeviceAdminReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			super.onReceive(context, intent);
+			System.out.println("onreceiver");
+		}
+
+		@Override
+		public void onEnabled(Context context, Intent intent) {
+			System.out.println("激活使用");
+			super.onEnabled(context, intent);
+		}
+
+		@Override
+		public void onDisabled(Context context, Intent intent) {
+			System.out.println("取消激活");
+			super.onDisabled(context, intent);
+		}
+
+	}
 }

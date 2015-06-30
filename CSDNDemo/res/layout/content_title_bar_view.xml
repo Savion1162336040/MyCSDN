@@ -31,6 +31,13 @@
             android:paddingRight="10dp"
             android:src="@drawable/default_ptr_rotate"
             android:id="@+id/content_title_bar_view_search" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="锁屏"
+            android:layout_toLeftOf="@id/content_title_bar_view_search"
+            android:id="@+id/content_title_bar_view_lock"
+            />
     </RelativeLayout>
 
     <View

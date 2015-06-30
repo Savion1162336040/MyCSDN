@@ -10,6 +10,10 @@
         android:layout_height="0dp"
         android:layout_weight="1" >
 
+        <com.shouwei.csdn.customview.MyWaterRipples
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" />
+
         <ImageView
             android:id="@+id/sidemenu_view_icon"
             android:layout_width="wrap_content"
@@ -48,19 +52,18 @@
             android:padding="10dp" >
 
             <ImageView
+                android:id="@+id/sidemenu_view_read_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/read"
-                android:id="@+id/sidemenu_view_read_icon"
-                 />
+                android:background="@drawable/read" />
 
             <TextView
+                android:id="@+id/sidemenu_view_read_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="阅读"
                 android:textColor="@color/gray_text_color"
-                android:id="@+id/sidemenu_view_read_tv"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -77,18 +80,18 @@
             android:padding="10dp" >
 
             <ImageView
+                android:id="@+id/sidemenu_view_ask_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sidemenu_view_ask_icon"
                 android:background="@drawable/ask" />
 
             <TextView
+                android:id="@+id/sidemenu_view_ask_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="问答"
                 android:textColor="@color/gray_text_color"
-                android:id="@+id/sidemenu_view_ask_tv"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -105,18 +108,18 @@
             android:padding="10dp" >
 
             <ImageView
+                android:id="@+id/sidemenu_view_bbs_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sidemenu_view_bbs_icon"
                 android:background="@drawable/bbs" />
 
             <TextView
+                android:id="@+id/sidemenu_view_bbs_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="论坛"
                 android:textColor="@color/gray_text_color"
-                android:id="@+id/sidemenu_view_bbs_tv"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -133,18 +136,18 @@
             android:padding="10dp" >
 
             <ImageView
+                android:id="@+id/sidemenu_view_my_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sidemenu_view_my_icon"
                 android:background="@drawable/my" />
 
             <TextView
+                android:id="@+id/sidemenu_view_my_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="我的"
                 android:textColor="@color/gray_text_color"
-                android:id="@+id/sidemenu_view_my_tv"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -161,18 +164,18 @@
             android:padding="10dp" >
 
             <ImageView
+                android:id="@+id/sidemenu_view_set_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/sidemenu_view_set_icon"
                 android:background="@drawable/set" />
 
             <TextView
+                android:id="@+id/sidemenu_view_set_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="设置"
                 android:textColor="@color/gray_text_color"
-                android:id="@+id/sidemenu_view_set_tv"
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>

@@ -14,7 +14,6 @@ public class LockService extends Service{
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		
 	}
 
 }
